@@ -1,0 +1,83 @@
+{{ define "title" }}Backend{{ end }}
+
+{{ define "header" }}
+
+	
+
+{{ end }}
+
+{{ define "menu" }}
+
+	<ul class="nav nav-list">
+		<li class="nav-header">Posts</li>
+		<li {{ if equal .ActionName "AddPost" }}class="active"{{ end }}><a href="/backend/addpost">Add</a></li>
+	</ul>
+
+{{ end }}
+
+{{ define "content" }}
+	
+	<form method="post">
+		<legend>Post</legend>
+		
+		{{ with .Data.ErrMsg }}
+			<div class="alert alert-error">{{.}}</div>
+		{{ end }}
+		
+		<div class="controls">
+			<input class="span7" type="text" name="Title" placeholder="Title" value="{{.Data.Post.Title}}" />
+			<input class="span5" type="text" name="Tags" placeholder="Tags (separated by comma)" value="{{.Data.Post.Tags}}" />
+			<p>
+				<textarea class="span9" id="contentarea" name="Body" rows="17" placeholder="Content">{{.Data.Post.Body}}</textarea>
+			</p>
+		</div>
+
+		<div>
+			<label class="checkbox inline">
+				<input type="checkbox" name="Publish" {{ if .Data.Post.Publish }}checked="checked"{{ end }} /> Publish
+			</label>
+			<label class="checkbox inline">
+				<input type="checkbox" name="Page" {{ if .Data.Post.Page }}checked="checked"{{ end }} /> Page
+			</label>
+		</div>
+
+		<div class="form-actions">
+			<button type="submit" class="btn btn-primary">Save</button>
+			{{ if .Data.Post.Id }}
+				<button type="button" class="btn" data-toggle="modal" data-target="#delconfirm">Delete</button>
+			{{ end }}
+		</div>
+		
+	</form>
+
+{{ end }}
+
+{{ define "footer" }}
+	
+	<div id="delconfirm" class="modal hide">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>Delete</h3>
+		</div>
+		<div class="modal-body">
+			This item will be permanently deleted and cannot be recovered. Are you sure?
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
+			<a href="/backend/deletepost/{{.Data.Post.Id}}" class="btn btn-primary">Confirm</a>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="http://tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+	<script type="text/javascript">
+		tinymce.init({
+			selector: "textarea",
+			content_css: "http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css",
+			plugins: ["code paste autoresize"],
+			paste_remove_styles: true
+		});
+	</script>
+
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+
+{{ end }}

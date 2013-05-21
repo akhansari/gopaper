@@ -1,0 +1,18 @@
+{{ define "paginationNav" }}
+
+	<div>
+		{{ if .Data.HasNewer }}
+			<div style="float:right;">
+			{{ if equal .Data.Page 2 }}
+				<a href="..">
+			{{ else }}
+				<a href="{{ .Data.BaseUrl }}/page/{{ plus .Data.Page -1 }}">
+			{{ end }}
+			Newer posts <i class="icon-arrow-right"></i></a></div>
+		{{ end }}
+		{{ if .Data.HasOlder }}
+			<div><a href="{{ .Data.BaseUrl }}/page/{{ plus .Data.Page 1 }}"><i class="icon-arrow-left"></i> Older posts</a></div>
+		{{ end }}
+	</div>
+
+{{ end }}

@@ -1,0 +1,35 @@
+{{ define "title" }}Backend{{ end }}
+
+{{ define "menu" }}
+
+	<ul class="nav nav-list">
+		<li class="nav-header">Posts</li>
+		<li><a href="/backend/addpost">Add</a></li>
+	</ul>
+
+{{ end }}
+
+{{ define "content" }}
+	
+	<table class="table table-striped">
+		<tr>
+			<th>#</th>
+			<th>Title</th>
+			<th>Published</th>
+			<th>Added</th>
+			<th>Edited</th>
+		</tr>
+		{{ range .Data.Posts }}
+			<tr>
+				<td>{{.Id}}</td>
+				<td><a href="/backend/post/{{.Id}}">{{.Title}}</a></td>
+				<td>{{yesno .Publish}}</td>
+				<td>{{date .AddDate}}</td>
+				<td>{{date .EditDate}}</td>
+			</tr>
+		{{ end }}
+	</table>
+
+	{{ template "paginationNav" . }}
+
+{{ end }}

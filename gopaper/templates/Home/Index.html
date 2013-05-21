@@ -1,0 +1,37 @@
+{{ define "title" }}GoPaper{{ end }}
+
+{{ define "menu" }}
+	
+	
+
+{{ end }}
+
+{{ define "content" }}
+	
+	{{ range .Data.Posts }}
+		<div style="margin:0 0 30px 0;">
+
+			<div>
+				<div class="post-date">
+					<div class="month">{{.Month}}</div>
+					<div class="day">{{.Day}}</div>
+				</div>
+				<h2><a href="{{.Url}}">{{.Title}}</a></h2>
+			</div>
+
+			<div>{{htmlSafe .Body}}</div>
+
+			<div style="margin-top:18px;">
+				<div style="float:right;"><a href="{{.Url}}">Read more</a></div>
+				<div>
+					{{ template "postTagsList" .TagsArr }}
+				</div>
+			</div>
+
+		</div>
+		<hr />
+	{{ end }}
+
+	{{ template "paginationNav" . }}
+
+{{ end }}

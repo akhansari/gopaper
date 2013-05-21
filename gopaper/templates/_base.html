@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>{{ template "title" . }}</title>
+
+	<meta name="generator" content="gopaper" />
+
+	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/css/default.css" />
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+	<link rel="shortcut icon" href="/assets/favicon.png" />
+	<link rel="apple-touch-icon-precomposed" href="/assets/apple-touch-icon-57-precomposed.png" />
+
+	{{ template "header" . }}
+	{{ define "header" }}{{ end }}
+
+</head>
+<body>
+
+    <div>
+        <div class="container" style="">
+            <div class="navbar navbar-inverse" style="margin:10px 0;">
+                <div class="navbar-inner">
+                    {{ if equal .ControllerName "Backend" }}
+                        <a class="brand" href="/backend">Backend</a>
+                    {{ else }}
+                        <a class="brand" href="/">GoPaper</a>
+                    {{ end }}
+                    <ul class="nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<div class="container">
+        <div class="row">
+            <div class="span9">
+
+                {{ template "content" . }}
+
+            </div>
+            <div class="span3">
+                
+                {{ template "menu" . }}
+                {{ define "menu" }}{{ end }}
+
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer">
+        <small class="muted">Powered by <a href="https://github.com/akhansari/gopaper" target="_blank">GoPaper</a></small>
+    </footer>
+
+    {{ template "footer" . }}
+    {{ define "footer" }}{{ end }}
+
+</body>
+</html>

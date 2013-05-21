@@ -1,0 +1,62 @@
+{{ define "title" }}{{.Data.Post.Title}}{{ end }}
+
+{{ define "header" }}
+	<meta name="description" content="{{ .Data.Post.ShortDesc }}" />
+	<meta name="keywords" content="{{ .Data.Post.Tags }}" />
+{{ end }}
+
+{{ define "menu" }}
+	
+	<div style="margin: 60px 0 0 0;">
+		<i class="icon-time"></i>
+		{{ date .Data.Post.AddDate }}
+	</div>
+	<div style="margin: 5px 0 0 0;">
+		<i class="icon-comment"></i>
+		<span class="livefyre-commentcount">0</span>
+	</div>
+	<div style="margin: 5px 0 0 0;">
+		<i class="icon-tags"></i>
+		{{ template "postTagsList" .Data.Post.TagsArr }}
+	</div>
+
+{{ end }}
+
+{{ define "content" }}
+	
+	<div>
+
+		<h1>{{.Data.Post.Title}}</h1>
+
+		<div>{{htmlSafe .Data.Post.Body}}</div>
+
+	</div>
+
+	<div>
+	{{ if .IsDevApp }}
+	{{ else }}
+		<!-- START: Livefyre Embed -->
+		<div id="livefyre-comments"></div>
+		<script type="text/javascript" src="http://zor.livefyre.com/wjs/v3.0/javascripts/livefyre.js"></script>
+		<script type="text/javascript">
+		(function () {
+			var articleId = fyre.conv.load.makeArticleId({{.Data.Post.Id}});
+		    fyre.conv.load({}, [{
+				el: 'livefyre-comments',
+				network: "livefyre.com",
+				siteId: "123456",
+				articleId: articleId,
+				signed: false,
+				collectionMeta: {
+					articleId: articleId,
+					url: fyre.conv.load.makeCollectionUrl(),
+				}
+			}], function() {});
+		}());
+		</script>
+		<script type="text/javascript" src="http://zor.livefyre.com/wjs/v1.0/javascripts/CommentCount.js"></script>
+		<!-- END: Livefyre Embed -->
+	{{ end }}
+	</div>
+
+{{ end }}

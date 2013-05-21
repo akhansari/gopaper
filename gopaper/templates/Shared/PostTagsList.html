@@ -1,0 +1,5 @@
+{{ define "postTagsList" }}
+	
+	{{ range $i, $e := . }}{{ if $i }},{{ end }} <a href="/tag/{{ . }}">{{.}}</a>{{ end }}
+
+{{ end }}
