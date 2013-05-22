@@ -10,6 +10,6 @@ installation
 - Follow the
 [instructions](https://developers.google.com/appengine/docs/go/gettingstarted/devenvironment)
 to download the App Engine SDK for Go and set it up in your environment.
-- Get this repository to a local directory : `git clone --recursive https://github.com/akhansari/gopaper/`
+- Get this repository to a local directory : `git clone --recursive https://github.com/akhansari/gopaper.git`
 - Finally CD into the directory and run : `dev_appserver.py ./`
 - Try the app out by visiting `http://localhost:8080` and `http://localhost:8080/backend` for the backend.
