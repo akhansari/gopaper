@@ -22,7 +22,7 @@ func (c Post) Index() {
 		http.Error(c.Response, "Post not found", http.StatusNotFound)
 		return
 	}
-	postShow := models.FormatPost(post)
+	postShow := models.FormatPost(*post)
 
 	data := struct {
 		Post *models.PostShow

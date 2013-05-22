@@ -31,16 +31,16 @@ func FormatPosts(posts *[]Post) *[]PostShow {
 			post.Body = rgx.FindString(post.Body)
 		}
 
-		postsShow[i] = *FormatPost(&post)
+		postsShow[i] = *FormatPost(post)
 	}
 	return &postsShow
 }
 
 // prepare the post for display
-func FormatPost(post *Post) *PostShow {
+func FormatPost(post Post) *PostShow {
 
 	postShow := PostShow{
-		post,
+		&post,
 		fmt.Sprintf("%02d", post.AddDate.Day()),
 		post.AddDate.Month().String()[:3],
 		strings.Split(post.Tags, ","),
