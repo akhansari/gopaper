@@ -1,5 +1,5 @@
 application: myproject
-version: 1
+version: 1-0-beta
 runtime: go
 api_version: go1
 

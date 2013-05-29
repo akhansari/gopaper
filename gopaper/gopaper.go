@@ -4,13 +4,14 @@ import (
 	"github.com/gorilla/mux"
 	"net/http"
 
+	"gopaper/config"
 	"gopaper/handlers"
 )
 
-// $HOME/google_appengine/dev_appserver.py $HOME/Projects/gopaper/
-// $HOME/google_appengine/appcfg.py update $HOME/Projects/gopaper/
-
 func init() {
+
+	config.InitDefault()
+
 	router := mux.NewRouter().StrictSlash(true)
 
 	router.HandleFunc("/", handlers.MakeHandler(handlers.Home.Index))

@@ -32,9 +32,9 @@
 
 	</div>
 
+	{{ if .Config.LivefyreId }}
+	<hr style="margin: 50px 0px 20px 0;" />
 	<div>
-	{{ if .IsDevApp }}
-	{{ else }}
 		<!-- START: Livefyre Embed -->
 		<div id="livefyre-comments"></div>
 		<script type="text/javascript" src="http://zor.livefyre.com/wjs/v3.0/javascripts/livefyre.js"></script>
@@ -44,7 +44,7 @@
 		    fyre.conv.load({}, [{
 				el: 'livefyre-comments',
 				network: "livefyre.com",
-				siteId: "123456",
+				siteId: "{{.Config.LivefyreId}}",
 				articleId: articleId,
 				signed: false,
 				collectionMeta: {
@@ -56,7 +56,7 @@
 		</script>
 		<script type="text/javascript" src="http://zor.livefyre.com/wjs/v1.0/javascripts/CommentCount.js"></script>
 		<!-- END: Livefyre Embed -->
-	{{ end }}
 	</div>
+	{{ end }}
 
 {{ end }}

@@ -11,6 +11,7 @@ import (
 	"runtime"
 	"strings"
 
+	"gopaper/config"
 	"gopaper/ex/templateex"
 )
 
@@ -19,7 +20,6 @@ type Controller struct {
 	Action      string   // name of the action
 	ViewName    string   // name of the view
 	NestedViews []string // names of nested views
-	IsDevApp    bool
 
 	Context appengine.Context // app engine context
 
@@ -41,7 +41,6 @@ func MakeHandler(action interface{}) http.HandlerFunc {
 
 		// fill the base controller
 		baseController := new(Controller)
-		baseController.IsDevApp = appengine.IsDevAppServer()
 		baseController.Response = rsp
 		baseController.Request = req
 		baseController.Name = controllerType.Name()
@@ -63,18 +62,8 @@ func (c *Controller) Render(data interface{}) {
 		c.ViewName = c.Name + "/" + c.Action
 	}
 
-	// create template functions
-	funcs := template.FuncMap{
-		"equal":       templateex.Equal,
-		"plus":        templateex.Addition,
-		"date":        templateex.FormatDate,
-		"yesno":       templateex.FormatBool,
-		"htmlSafe":    templateex.HtmlSafe,
-		"queryEscape": templateex.QueryEscape,
-	}
-
 	// create a new template
-	t := template.New("_base.html").Funcs(funcs)
+	t := template.New("_base.html").Funcs(templateFuncs)
 
 	// inject nested views
 	for _, value := range c.NestedViews {
@@ -93,22 +82,33 @@ func (c *Controller) Render(data interface{}) {
 		Data
 		ControllerName string
 		ActionName     string
-		IsDevApp       bool
+		Config         *config.Config
 	}{
 		data,
 		c.Name,
 		c.Action,
-		c.IsDevApp,
+		config.Default,
 	}
 
 	// show it
 	err := t.Execute(c.Response, wrapper)
 
 	// if any error, show it only on dev server
-	if err != nil && c.IsDevApp {
+	if err != nil && config.Default.IsDevApp {
 		fmt.Fprintf(c.Response, err.Error())
 	}
 }
+
+var (
+	// template functions
+	templateFuncs = template.FuncMap{
+		"equal":    templateex.Equal,
+		"plus":     templateex.Addition,
+		"date":     templateex.FormatDate,
+		"yesno":    templateex.FormatBool,
+		"htmlSafe": templateex.HtmlSafe,
+	}
+)
 
 // redirect to the requested path
 func (c *Controller) Redirect(path string) {

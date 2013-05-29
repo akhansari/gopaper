@@ -1,9 +1,7 @@
 package templateex
 
 import (
-	"html"
 	"html/template"
-	"net/url"
 	"reflect"
 	"time"
 )
@@ -57,12 +55,4 @@ func FormatBool(value bool) string {
 
 func HtmlSafe(text string) template.HTML {
 	return template.HTML(text)
-}
-
-func HtmlEscape(text string) string {
-	return html.EscapeString(text)
-}
-
-func QueryEscape(text string) string {
-	return url.QueryEscape(text)
 }
