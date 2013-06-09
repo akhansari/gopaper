@@ -22,57 +22,57 @@
 </head>
 <body>
 
-    <div>
-        <div class="container" style="">
-            <div class="navbar navbar-inverse" style="margin:10px 0;">
-                <div class="navbar-inner">
-                    {{ if equal .ControllerName "Backend" }}
-                        <a class="brand" href="/backend">Backend</a>
-                    {{ else }}
-                        <a class="brand" href="/">{{ .Config.Title }}</a>
-                    {{ end }}
-                    <ul class="nav">
-                        <li><a href="/">Home</a></li>
-                        <li><a href="#">About</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div>
+		<div class="container" style="">
+			<div class="navbar navbar-inverse" style="margin:10px 0;">
+				<div class="navbar-inner">
+					{{ if equal .ControllerName "Backend" }}
+						<a class="brand" href="/backend">Backend</a>
+					{{ else }}
+						<a class="brand" href="/">{{ .Config.Title }}</a>
+					{{ end }}
+					<ul class="nav">
+						<li><a href="/">Home</a></li>
+						<li><a href="#">About</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<div class="container">
-        <div class="row">
-            <div class="span9">
+		<div class="row">
+			<div class="span9">
 
-                {{ template "content" . }}
+				{{ template "content" . }}
 
-            </div>
-            <div class="span3">
-                
-                {{ template "menu" . }}
-                {{ define "menu" }}{{ end }}
+			</div>
+			<div class="span3">
+				
+				{{ template "menu" . }}
+				{{ define "menu" }}{{ end }}
 
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
 
-    <footer id="footer">
-        <small class="muted">Powered by <a href="https://github.com/akhansari/gopaper" target="_blank">GoPaper</a></small>
-    </footer>
+	<footer id="footer">
+		<small class="muted">Powered by <a href="https://github.com/akhansari/gopaper" target="_blank">GoPaper</a></small>
+	</footer>
 
-    {{ template "footer" . }}
-    {{ define "footer" }}{{ end }}
+	{{ template "footer" . }}
+	{{ define "footer" }}{{ end }}
 
-    {{ if .Config.AnalyticsId }}
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-            ga('create', '{{.Config.AnalyticsId}}', '{{.Config.AnalyticsName}}');
-            ga('send', 'pageview');
-        </script>
-    {{ end }}
+	{{ if .Config.AnalyticsId }}
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', '{{.Config.AnalyticsId}}', '{{.Config.AnalyticsName}}');
+			ga('send', 'pageview');
+		</script>
+	{{ end }}
 
 </body>
 </html>

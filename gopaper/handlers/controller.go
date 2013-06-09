@@ -77,9 +77,8 @@ func (c *Controller) Render(data interface{}) {
 	))
 
 	// wrap the requested data
-	type Data interface{}
 	wrapper := struct {
-		Data
+		Data           interface{}
 		ControllerName string
 		ActionName     string
 		Config         *config.Config
